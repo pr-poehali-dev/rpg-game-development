@@ -4,6 +4,10 @@ import { Card, CardContent } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
 import GachaSpin from '@/components/GachaSpin';
 import Inventory from '@/components/Inventory';
+import Market from '@/components/Market';
+import Trade from '@/components/Trade';
+import Battle from '@/components/Battle';
+import AdminPanel from '@/components/AdminPanel';
 
 interface User {
   user_id: number;
@@ -118,33 +122,25 @@ export default function MainGame({ user, onLogout, onBalanceUpdate }: MainGamePr
         {activeSection === 'gacha' && <GachaSpin userId={user.user_id} />}
         {activeSection === 'inventory' && <Inventory userId={user.user_id} />}
         {activeSection === 'market' && (
-          <div className="text-center py-20">
-            <Icon name="ShoppingCart" size={64} className="mx-auto mb-4 text-muted-foreground" />
-            <h2 className="text-2xl font-bold mb-2">Market</h2>
-            <p className="text-muted-foreground">Coming soon...</p>
-          </div>
+          <Market 
+            userId={user.user_id} 
+            userBalance={user.unc_balance}
+            onBalanceUpdate={onBalanceUpdate}
+          />
         )}
         {activeSection === 'trade' && (
-          <div className="text-center py-20">
-            <Icon name="ArrowLeftRight" size={64} className="mx-auto mb-4 text-muted-foreground" />
-            <h2 className="text-2xl font-bold mb-2">Trade</h2>
-            <p className="text-muted-foreground">Coming soon...</p>
-          </div>
+          <Trade 
+            userId={user.user_id}
+            userBalance={user.unc_balance}
+          />
         )}
         {activeSection === 'battle' && (
-          <div className="text-center py-20">
-            <Icon name="Swords" size={64} className="mx-auto mb-4 text-muted-foreground" />
-            <h2 className="text-2xl font-bold mb-2">Battle Arena</h2>
-            <p className="text-muted-foreground">Coming soon...</p>
-          </div>
+          <Battle 
+            userId={user.user_id}
+            onBalanceUpdate={onBalanceUpdate}
+          />
         )}
-        {activeSection === 'admin' && user.is_admin && (
-          <div className="text-center py-20">
-            <Icon name="Settings" size={64} className="mx-auto mb-4 text-accent" />
-            <h2 className="text-2xl font-bold mb-2">Admin Panel</h2>
-            <p className="text-muted-foreground">Coming soon...</p>
-          </div>
-        )}
+        {activeSection === 'admin' && user.is_admin && <AdminPanel />}
       </main>
     </div>
   );
