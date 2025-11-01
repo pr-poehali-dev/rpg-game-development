@@ -1,0 +1,35 @@
+{
+  "tests": [
+    {
+      "name": "Get cooldown status",
+      "method": "GET",
+      "path": "/",
+      "headers": {
+        "X-User-Id": "1"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "can_spin": "boolean",
+        "free_spins": "number",
+        "seconds_until_ready": "number"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Perform gacha spin",
+      "method": "POST",
+      "path": "/",
+      "headers": {
+        "X-User-Id": "1"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "character_id": "number",
+        "name": "string",
+        "rarity": "string",
+        "damage": "number"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
